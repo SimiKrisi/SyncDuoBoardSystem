@@ -219,12 +219,25 @@ namespace SyncDuoBoard
             if (isNumber(input)&&int.Parse(input)>5)
             {
                 int newSize = int.Parse(input);
-                int oldSize = levelsData.levels[OldLevelIndex].width;
+                int oldSize = EditingLevel.height;
                 EditingLevel.width = newSize;
                 EditingLevel.height = newSize;
                 EditingLevel.mazeLayoutA =ExtendMazeLayout(EditingLevel.mazeLayoutA, newSize, oldSize);
                 EditingLevel.mazeLayoutB = ExtendMazeLayout(EditingLevel.mazeLayoutB, newSize, oldSize);
-                
+                EditingLevel.startPosA = RepositionEntity(newSize, EditingLevel.mazeLayoutA, EditingLevel.startPosA);
+                EditingLevel.startPosB = RepositionEntity(newSize, EditingLevel.mazeLayoutB, EditingLevel.startPosB);
+                EditingLevel.finishPosA = RepositionEntity(newSize, EditingLevel.mazeLayoutA, EditingLevel.finishPosA);
+                EditingLevel.finishPosB = RepositionEntity(newSize, EditingLevel.mazeLayoutB, EditingLevel.finishPosB);
+                for (int i = 0; i < EditingLevel.enemyPositionsA.Count(); i++)
+                {
+                    EditingLevel.enemyPositionsA[i] = RepositionEntity(newSize, EditingLevel.mazeLayoutA, EditingLevel.enemyPositionsA[i]);
+                   
+                }
+                for (int i = 0; i < EditingLevel.enemyPositionsB.Count(); i++)
+                {
+                    EditingLevel.enemyPositionsB[i] = RepositionEntity(newSize, EditingLevel.mazeLayoutB, EditingLevel.enemyPositionsB[i]);
+                    
+                }
                 LoadLevelDetails(EditingLevel);
             }
             else
@@ -232,6 +245,13 @@ namespace SyncDuoBoard
                 BoardSize_Input.Text = levelsData.levels[OldLevelIndex].width.ToString();
             }
             
+        }
+        private Position RepositionEntity(int newSize, List<int> layout, Position oldPosition)
+        {
+            Position newPos = new Position { x = Math.Min(oldPosition.x, newSize - 2), y = Math.Min(oldPosition.y, newSize - 2) };
+            layout[newPos.y * newSize + newPos.x] = 0;
+            
+            return newPos;
         }
         private List<int> ExtendMazeLayout( List<int> Layout,int newSize, int oldSize)
         {
@@ -260,7 +280,11 @@ namespace SyncDuoBoard
         }
         private void StartPosAX_Input_LostFocus(object sender, RoutedEventArgs e)
         {
-            
+            string input = StartPosAX_Input.Text;
+            if (isNumber(input)&&int.Parse(input)>0&&int.Parse(input)<EditingLevel.width-1)
+            {
+                int newX = int.Parse(input);
+            }
         }
 
         private void StartPosAY_Input_LostFocus(object sender, RoutedEventArgs e)

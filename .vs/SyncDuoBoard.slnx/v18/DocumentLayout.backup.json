@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\syncduoboard\\models\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|solutionrelative:syncduoboard\\models\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\syncduoboard\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|solutionrelative:syncduoboard\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|c:\\users\\krist\\desktop\\projekt\\syncduoboard\\syncduoboard\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|solutionrelative:syncduoboard\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|c:\\users\\krist\\desktop\\projekt\\syncduoboard\\syncduoboard\\models\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|solutionrelative:syncduoboard\\models\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A1BF3075-5BBA-4DCC-8C04-1EBAC1782483}|SyncDuoBoard\\SyncDuoBoard.csproj|C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\syncduoboard\\models\\position.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -66,13 +66,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\SyncDuoBoard\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "SyncDuoBoard\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\SyncDuoBoard\\MainWindow.xaml.cs*",
-              "RelativeToolTip": "SyncDuoBoard\\MainWindow.xaml.cs*",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAEwHIAAAAoAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\SyncDuoBoard\\MainWindow.xaml.cs",
+              "RelativeToolTip": "SyncDuoBoard\\MainWindow.xaml.cs",
+              "ViewState": "AgIAANsAAAAAAAAAAAAtwO0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-23T22:27:26.726Z",
               "EditorCaption": ""
@@ -91,13 +91,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Level.cs",
               "DocumentMoniker": "C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\SyncDuoBoard\\Models\\Level.cs",
               "RelativeDocumentMoniker": "SyncDuoBoard\\Models\\Level.cs",
               "ToolTip": "C:\\Users\\krist\\Desktop\\Projekt\\SyncDuoBoard\\SyncDuoBoard\\Models\\Level.cs",
               "RelativeToolTip": "SyncDuoBoard\\Models\\Level.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAYwCQAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAA6wCMAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-23T22:42:15.172Z",
               "EditorCaption": ""
@@ -112,8 +112,7 @@
               "RelativeToolTip": "SyncDuoBoard\\Models\\Position.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-23T22:42:14.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-23T22:42:14.852Z"
             }
           ]
         },
