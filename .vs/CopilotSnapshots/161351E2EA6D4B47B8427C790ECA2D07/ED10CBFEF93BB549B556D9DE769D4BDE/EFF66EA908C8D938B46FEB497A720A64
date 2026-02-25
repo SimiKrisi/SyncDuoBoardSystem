@@ -1,0 +1,175 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
+using SyncDuoBoard.Models;
+using System.CodeDom.Compiler;
+using System.Diagnostics;
+
+namespace SyncDuoBoard
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+       
+        private LevelsData levelsData;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            LoadBoardsFromJson("levels.json");
+
+
+        }
+        public void LoadBoardsFromJson(string filename)
+        {
+            try
+            {
+                if (!File.Exists(filename))
+                {
+                    MessageBox.Show($"File '{filename}' not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                string levelsJsonContent = File.ReadAllText(filename);
+                levelsData = JsonConvert.DeserializeObject<LevelsData>(levelsJsonContent);
+
+                if (levelsData != null && levelsData.levels != null)
+                {
+                    DisplayBoards();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading boards from JSON: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DisplayBoards()
+        {
+            BoardsListContainer.Children.Clear();
+
+            foreach (var level in levelsData.levels)
+            {
+                StackPanel BoardsListItem = new StackPanel 
+                { 
+                    Width = this.Width-40,
+                    Orientation = Orientation.Horizontal,
+                };
+                StackPanel mazeA = new StackPanel
+                {
+                    Height =1000,
+                };
+                StackPanel mazeB = new StackPanel
+                {
+                    Height = 1000,
+                };
+                GenerateComplexBoard(level, mazeA, mazeB);
+                BoardsListItem.Children.Add(mazeA);
+                BoardsListItem.Children.Add(mazeB);
+                TextBlock details = new TextBlock
+                {
+                    Text = level.levelName + "     |      " + level.width + "*" + level.height + "      |      EnemiesA: " + level.enemyPositionsA.Count() + "; EnemiesB: " + level.enemyPositionsB.Count(),
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(10),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    FontSize = 14,
+                };
+
+                BoardsListItem.Children.Add(details);
+                Button editLevelButton = new Button
+                {
+                    Content = "Edit",
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(10),
+                    Height = 40,
+                };
+                editLevelButton.Click += (sender, e) => LoadLevel(level);
+                BoardsListItem.Children.Add(editLevelButton);
+                BoardsListContainer.Children.Add(BoardsListItem);
+            }
+        }
+
+        private void LoadLevel(Level level)
+        {
+            MyTabControl.SelectedIndex = 2;
+            LoadLevelDetails(level);
+        }
+        private void LoadLevelDetails(Level level)
+        {
+            LevelName.Text = level.levelName;
+            LevelSize.Text = $"{level.width} x {level.height}";
+            GenerateComplexBoard(level, BoardAContainer, BoardBContainer);
+        }
+        private void GenerateComplexBoardPreview(Level level, StackPanel boardAContainer, StackPanel boardBContainer)
+        {
+            GenerateSingleBoard(level.width, level.height, level.mazeLayoutA, level.startPosA, level.finishPosA, level.enemyPositionsA, boardAContainer, 20);
+            GenerateSingleBoard(level.width, level.height, level.mazeLayoutB, level.startPosB, level.finishPosB, level.enemyPositionsB, boardBContainer, 20);
+        }
+
+        private void GenerateComplexBoard(Level level, StackPanel boardAContainer, StackPanel boardBContainer)
+        {
+            Debug.WriteLine($"Generating boards for level: {level.levelName}");
+            GenerateSingleBoard(level.width, level.height, level.mazeLayoutA, level.startPosA, level.finishPosA, level.enemyPositionsA, boardAContainer, 50);
+            GenerateSingleBoard(level.width, level.height, level.mazeLayoutB, level.startPosB, level.finishPosB, level.enemyPositionsB, boardBContainer, 50);
+
+        }
+        private void GenerateSingleBoard(int width, int height, List<int> mazeLayout, Position startPos, Position finishPos, List<Position> enemyPositions, StackPanel boardContainer, int cellSize)
+        {
+            boardContainer.Children.Clear();
+            for (int y = 0; y < height; y++)
+            {
+                StackPanel row = new StackPanel { Orientation = Orientation.Horizontal };
+                for (int x = 0; x < width; x++)
+                {
+                    int index = y * width + x;
+                    var cellcolor = Brushes.Green;
+                    if (mazeLayout[index]==0)
+                    {
+                        cellcolor = Brushes.LightGray;
+                    }
+                    Border cell = new Border
+                    {
+                        Width = cellSize,
+                        Height = cellSize,
+                        Background = cellcolor,
+                        BorderBrush = Brushes.Black,
+                        BorderThickness = new Thickness(0.5)
+                    };
+                    if (startPos.x == x && startPos.y == y)
+                    {
+                        cell.Background = Brushes.LightSkyBlue;
+                    }
+                    else if (finishPos.x == x && finishPos.y == y)
+                    {
+                        cell.Background = Brushes.White;
+
+                    }
+                    else if (enemyPositions.Any(pos => pos.x == x && pos.y == y))
+                    {
+                        cell.Background = Brushes.Red;
+                    }
+                    row.Children.Add(cell);
+                }
+
+                boardContainer.Children.Add(row);
+            }
+        }
+
+    }
+}

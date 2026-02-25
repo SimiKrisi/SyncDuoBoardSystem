@@ -1,0 +1,84 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
+using SyncDuoBoard.Models;
+
+namespace SyncDuoBoard
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        private string levelsJsonContent;
+        private LevelsData levelsData;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            LoadBoardsFromJson("levels.json");
+
+
+        }
+        public void LoadBoardsFromJson(string filename)
+        {
+            try
+            {
+                if (!File.Exists(filename))
+                {
+                    MessageBox.Show($"File '{filename}' not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                levelsJsonContent = File.ReadAllText(filename);
+                levelsData = JsonConvert.DeserializeObject<LevelsData>(levelsJsonContent);
+
+                if (levelsData != null && levelsData.levels != null)
+                {
+                    DisplayBoards();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading boards from JSON: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DisplayBoards()
+        {
+            BoardsListContainer.Children.Clear();
+
+            foreach (var level in levelsData.levels)
+            {
+                Button levelButton = new Button
+                {
+                    Content = level.levelName,
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(10),
+                    Height = 40
+                };
+                levelButton.Click += (sender, e) => LoadLevel(level);
+                BoardsListContainer.Children.Add(levelButton);
+            }
+        }
+
+        private void LoadLevel(Level level)
+        {
+            MessageBox.Show($"Loading {level.levelName}...", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+}

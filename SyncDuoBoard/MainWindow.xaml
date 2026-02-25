@@ -1,0 +1,112 @@
+﻿<Window x:Class="SyncDuoBoard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SyncDuoBoard"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
+        <TabControl x:Name="MyTabControl">
+            <TabItem Header="Boards" >
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="BoardsListContainer">
+                        
+                    </StackPanel>
+                </ScrollViewer>
+
+            </TabItem>
+            <TabItem Header="Edit" IsSelected="True" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel x:Name="BoardAContainer" Grid.Row="0" Grid.Column="0">
+                        
+                    </StackPanel>
+                    <StackPanel x:Name="BoardBContainer" Grid.Row="1" Grid.Column="0">
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Label>ID of the board:</Label>
+                            <TextBox x:Name="BoardID_Input" Width="100" LostFocus="BoardID_Input_LostFocus"/>
+          
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Size of the board: </Label>
+                            <TextBox x:Name="BoardSize_Input" Width="100" LostFocus="BoardSize_Input_LostFocus" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Start pos A: </Label>
+                            <Label Content="X:"/>
+                            <TextBox x:Name="StartPosAX_Input" Width="50"  LostFocus="StartPosAX_Input_LostFocus"/>
+                            <Label Content="Y:"/>
+                            <TextBox x:Name="StartPosAY_Input" Width="50"  LostFocus="StartPosAY_Input_LostFocus"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Start pos B:</Label>
+                            <Label Content="X:"/>
+                            <TextBox x:Name="StartPosBX_Input" Width="50"  LostFocus="StartPosBX_Input_LostFocus"/>
+                            <Label Content="Y:"/>
+                            <TextBox x:Name="StartPosBY_Input" Width="50"  LostFocus="StartPosBY_Input_LostFocus"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Finish pos A:</Label>
+                            <Label Content="X:"/>
+                            <TextBox x:Name="FinishPosAX_Input" Width="50" LostFocus="FinishPosAX_Input_LostFocus"/>
+                            <Label Content="Y:"/>
+                            <TextBox x:Name="FinishPosAY_Input" Width="50" LostFocus="FinishPosAY_Input_LostFocus"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Finish pos B:</Label>
+                            <Label Content="X:"/>
+                            <TextBox x:Name="FinishPosBX_Input" Width="50" LostFocus="FinishPosBX_Input_LostFocus"/>
+                            <Label Content="Y:"/>
+                            <TextBox x:Name="FinishPosBY_Input" Width="50" LostFocus="FinishPosBY_Input_LostFocus"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Enemy pos list A:</Label>
+                            <TextBox x:Name="EnemyPosAList_Input" Width="50" LostFocus="EnemyPosAList_Input_LostFocus"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Enemy pos list B:</Label>
+                            <TextBox x:Name="EnemyPosBList_Input" Width="50" LostFocus="EnemyPosBList_Input_LostFocus"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                            <Button x:Name="Submit_Button" Content="Save and export" Width="100" Margin="5"/>
+
+                        </StackPanel>
+                        
+                    </StackPanel>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0">
+                            Layout A :
+                        </Label>
+                        <TextBox x:Name="MazeLayoutA_Input" Grid.Row="1" LostFocus="MazeLayoutA_Input_LostFocus">
+                            
+                        </TextBox>
+                        <Label Grid.Row="2">
+                            Layout B :
+                        </Label>
+                        <TextBox x:Name="MazeLayoutB_Input" Grid.Row="3" LostFocus="MazeLayoutB_Input_LostFocus">
+
+                        </TextBox>
+                    </Grid>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
